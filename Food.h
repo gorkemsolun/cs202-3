@@ -17,6 +17,8 @@ public:
     Food();
     Food(pair<double, double> coordinates, int ID, int quality);
 
+    Food &operator=(const Food &right);
+
     pair<double, double> getCoordinates();
     int getID();
     int getQuality();

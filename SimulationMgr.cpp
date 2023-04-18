@@ -35,6 +35,7 @@ bool compareCreature(Creature &first, Creature &second) {
 }
 
 double calculateEuclidianDistance(pair<double, double> f, pair<double, double> s) {
+    //cout << sqrt(pow(f.first - s.first, 2) + pow(f.second - s.second, 2)) << endl;
     return sqrt(pow(f.first - s.first, 2) + pow(f.second - s.second, 2));
 }
 
@@ -48,7 +49,6 @@ int main() {
     vector<Creature> creatures;
     Heap foodHeap;
     int time = 0;
-    int currentIndexofFoodInputs = 0;
     ifstream data(f);
 
     // Simulation start
@@ -86,6 +86,8 @@ int main() {
         livingCreatureCount++;
     }
 
+    sort(creatures.begin(), creatures.end(), compareCreature);
+
     while (getline(data, s)) {
         foodInput.push_back(s);
     }
@@ -95,7 +97,7 @@ int main() {
 
         // Showing all creatures
 
-        cout << setprecision(2);
+        cout << setprecision(3);
         for (Creature creature : creatures) {
             cout << "Creature " << creature.getID() << ": ";
             cout << creature.getCoordinates().first << ", ";
@@ -104,45 +106,44 @@ int main() {
 
         // New foods
 
-        while (isFoodEligible(foodInput, currentIndexofFoodInputs, time)) {
-            int k = 0, before = 0;
-            int ID, quality;
-            pair<double, double> coordinates;
-            for (int j = 0; j < s.size(); ++j) {
-                if (s[j] == ',') {
-                    k++;
-                    if (k == 1) {
-                        d = s.substr(before, j - before);
-                        ID = stoi(d);
-                    } else if (k == 2) {
-                        d = s.substr(before, j - before);
-                        coordinates.first = stod(d);
-                    } else if (k == 3) {
-                        d = s.substr(before, j - before);
-                        coordinates.second = stod(d);
-                    } else if (k == 4) {
-                        d = s.substr(before, j - before);
-                        quality = stoi(d);
+        for (int i = 0; i < foodInput.size(); ++i) {
+            if (isFoodEligible(foodInput, i, time)) {
+                s = foodInput[i];
+                int k = 0, before = 0;
+                int ID, quality;
+                pair<double, double> coordinates;
+                for (int j = 0; j < s.size(); ++j) {
+                    if (s[j] == ',') {
+                        k++;
+                        if (k == 1) {
+                            d = s.substr(before, j - before);
+                            ID = stoi(d);
+                        } else if (k == 2) {
+                            d = s.substr(before, j - before);
+                            coordinates.first = stod(d);
+                        } else if (k == 3) {
+                            d = s.substr(before, j - before);
+                            coordinates.second = stod(d);
+                        } else if (k == 4) {
+                            d = s.substr(before, j - before);
+                            quality = stoi(d);
+                        }
+                        before = j + 1;
                     }
-                    before = j + 1;
                 }
+                foodHeap.heapInsert(Food(coordinates, ID, quality));
             }
-
-            foodHeap.heapInsert(Food(coordinates, ID, quality));
-            livingCreatureCount++;
-            currentIndexofFoodInputs++;
         }
 
         // Fighting period
 
-        sort(creatures.begin(), creatures.end(), compareCreature);
-
         for (int i = 0; i < creatures.size(); ++i) {
             if (creatures[i].isAlive()) {
                 for (int j = 0; j < creatures.size(); ++j) {
-                    if (2 > calculateEuclidianDistance(creatures[i].getCoordinates(), creatures[j].getCoordinates())
+                    if (i != j && 2 > calculateEuclidianDistance(creatures[i].getCoordinates(), creatures[j].getCoordinates())
                         && creatures[j].getHealth() <= creatures[i].getHealth()) {
                         creatures[j].kill();
+                        livingCreatureCount--;
                     }
                 }
             }
@@ -163,13 +164,24 @@ int main() {
 
         for (int i = 0; i < creatures.size(); ++i) {
             if (creatures[i].isAlive()) {
-
+                creatures[i].move(foodHeap.getTop().getCoordinates());
             }
         }
 
         // Health update
 
+        for (int i = 0; i < creatures.size(); ++i) {
+            if (creatures[i].isAlive()) {
+                creatures[i].setHealth(creatures[i].getHealth() - 1);
+                if (creatures[i].getHealth() <= 0) {
+                    creatures[i].kill();
+                    livingCreatureCount--;
+                }
+            }
+        }
+
         // Time update
+
         ++time;
     }
 

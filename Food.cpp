@@ -8,7 +8,11 @@
 
 #include "Food.h"
 
-Food::Food() {}
+Food::Food() {
+    this->coordinates = make_pair(0,0);
+    this->ID = -1;
+    this->quality = -1;
+}
 
 Food::Food(pair<double, double> coordinates, int ID, int quality) {
     this->coordinates = coordinates;
@@ -26,4 +30,13 @@ int Food::getID() {
 
 pair<double, double> Food::getCoordinates() {
     return this->coordinates;
+}
+
+Food &Food::operator=(const Food &right) {
+    if (&right != this) {
+        this->coordinates = right.coordinates;
+        this->quality = right.quality;
+        this->ID = right.ID;
+    }
+    return *this;
 }

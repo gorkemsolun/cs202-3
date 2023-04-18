@@ -24,6 +24,7 @@ public:
     bool isAlive();
     void kill();
     //bool compareCreature(Creature &first, Creature &second);
+    void move(pair<double, double> coordinates);
 
 private:
     pair<double, double> coordinates;
