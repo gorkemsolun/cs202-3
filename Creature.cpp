@@ -40,3 +40,7 @@ void Creature::kill() {
     this->alive = false;
 }
 
+void Creature::setHealth(int newHealth) {
+    this->health = newHealth;
+}
+

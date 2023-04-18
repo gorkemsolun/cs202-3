@@ -20,6 +20,7 @@ public:
     pair<double, double> getCoordinates();
     int getID();
     int getHealth();
+    void setHealth(int newHealth);
     bool isAlive();
     void kill();
     //bool compareCreature(Creature &first, Creature &second);

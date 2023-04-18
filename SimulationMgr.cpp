@@ -148,9 +148,22 @@ int main() {
             }
         }
 
-        //
+        // Food consuming
 
+        for (int i = 0; i < creatures.size(); ++i) {
+            if (creatures[i].isAlive()) {
+                if (1 >= calculateEuclidianDistance(creatures[i].getCoordinates(), foodHeap.getTop().getCoordinates())) {
+                    creatures[i].setHealth(creatures[i].getHealth() + foodHeap.getTop().getQuality());
+                    foodHeap.heapDelete();
+                }
+            }
+        }
 
+        // Moving
+
+        // Health update
+
+        // Time update
         ++time;
     }
 

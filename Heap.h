@@ -20,7 +20,7 @@ public:
     Food getTop();
     bool heapIsEmpty() const;
     void heapInsert(const Food& newItem);
-    void heapDelete(Food& rootItem);
+    void heapDelete();
 
 protected:
     void heapRebuild(int root);

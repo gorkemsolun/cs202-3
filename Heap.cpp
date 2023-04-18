@@ -34,12 +34,11 @@ void Heap::heapInsert(const Food &newItem) {
     this->size++;
 }
 
-void Heap::heapDelete(Food &rootItem) {
+void Heap::heapDelete() {
     if (heapIsEmpty()){
         cout << "HeapException: Heap empty" << endl;
     }
     else {
-        rootItem = this->items[0];
         this->items[0] = this->items[--this->size];
         heapRebuild(0);
     }
