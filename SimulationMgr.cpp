@@ -161,6 +161,12 @@ int main() {
 
         // Moving
 
+        for (int i = 0; i < creatures.size(); ++i) {
+            if (creatures[i].isAlive()) {
+
+            }
+        }
+
         // Health update
 
         // Time update
