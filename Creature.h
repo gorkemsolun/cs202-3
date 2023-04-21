@@ -6,10 +6,11 @@
  * Creature class for Wildlife Simulation
  * */
 
-#ifndef INC_2023_CREATURE_H
-#define INC_2023_CREATURE_H
 #include <bits/stdc++.h>
 using namespace std;
+
+#ifndef INC_2023_CREATURE_H
+#define INC_2023_CREATURE_H
 
 class Creature {
 public:
@@ -17,12 +18,11 @@ public:
     Creature(pair<double, double> coordinates, int ID, int health);
 
     pair<double, double> getCoordinates();
-    int getID();
-    int getHealth();
+    int getID() const;
+    int getHealth() const;
     void setHealth(int newHealth);
-    bool isAlive();
+    bool isAlive() const;
     void kill();
-    //bool compareCreature(Creature &first, Creature &second);
     void move(pair<double, double> coordinates);
 
 private:

@@ -6,39 +6,10 @@
  * Manager class for Wildlife Simulation
  * */
 
-#include "Creature.h"
-#include "Food.h"
-#include "Heap.h"
-#include <bits/stdc++.h>
-using namespace std;
+#include "SimulationMgr.h"
 
-/*
- * if id of first < second true, else false
- */
-
-
-bool compareCreature(Creature &first, Creature &second) {
-    if (first.getID() < second.getID()) {
-        return true;
-    }
-    return false;
-}
-
-double calculateEuclidianDistance(pair<double, double> f, pair<double, double> s) {
-    return sqrt(pow(f.first - s.first, 2) + pow(f.second - s.second, 2));
-}
-
-void printCreatures(vector<Creature> &creatures) {
-    for (Creature creature : creatures) {
-        cout << "Creature " << creature.getID() << ": ";
-        cout << creature.getCoordinates().first << ", ";
-        cout << creature.getCoordinates().second << endl;
-    }
-}
-
-
-int main(int argc, char** argv) {
-    string fileName = "C:\\Users\\pc\\Desktop\\2023\\data.txt";
+void SimulationMgr::run(string fileName) {
+    //string fileName = "C:\\Users\\pc\\Desktop\\2023\\data.txt";
 
     // Creating simulation space
 
@@ -81,7 +52,8 @@ int main(int argc, char** argv) {
 
     // sorting creatures according to their ids
 
-    sort(creatures.begin(), creatures.end(), compareCreature);
+    sort(creatures.begin(), creatures.end(), [](Creature first, Creature second)
+                                                                {return first.getID() < second.getID();});
 
     while (getline(data, s)) {
         int k = 0, before = 0;
@@ -130,7 +102,7 @@ int main(int argc, char** argv) {
             if (creatures[i].isAlive()) {
                 for (int j = 0; j < creatures.size(); ++j) {
                     if (creatures[j].isAlive() && i != j && creatures[j].getHealth() <= creatures[i].getHealth() &&
-                        calculateEuclidianDistance(creatures[i].getCoordinates(), creatures[j].getCoordinates()) < 2) {
+                        calculateEuclideanDistance(creatures[i].getCoordinates(), creatures[j].getCoordinates()) < 2) {
                         creatures[j].kill();
                         livingCreatureCount--;
                     }
@@ -143,7 +115,7 @@ int main(int argc, char** argv) {
         if (!foodQualityHeap.heapIsEmpty()) {
             for (Creature &creature : creatures) {
                 if (creature.isAlive()) {
-                    if (1 >= calculateEuclidianDistance(creature.getCoordinates(), foodQualityHeap.getTop().getCoordinates())) {
+                    if (1 >= calculateEuclideanDistance(creature.getCoordinates(), foodQualityHeap.getTop().getCoordinates())) {
                         creature.setHealth(creature.getHealth() + foodQualityHeap.getTop().getQuality());
                         foodQualityHeap.heapDelete();
                     }
@@ -177,9 +149,16 @@ int main(int argc, char** argv) {
 
         ++time;
     }
+}
 
+double SimulationMgr::calculateEuclideanDistance(pair<double, double> f, pair<double, double> s) {
+    return sqrt(pow(f.first - s.first, 2) + pow(f.second - s.second, 2));
+}
 
-
-
-    return 0;
+void SimulationMgr::printCreatures(vector<Creature> &creatures) {
+    for (Creature creature : creatures) {
+        cout << "Creature " << creature.getID() << ": ";
+        cout << creature.getCoordinates().first << ", ";
+        cout << creature.getCoordinates().second << endl;
+    }
 }

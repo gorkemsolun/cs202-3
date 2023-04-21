@@ -6,12 +6,11 @@
  * Food class for Wildlife Simulation
  * */
 
-
+#include <bits/stdc++.h>
+using namespace std;
 
 #ifndef INC_2023_FOOD_H
 #define INC_2023_FOOD_H
-#include <bits/stdc++.h>
-using namespace std;
 
 class Food {
 public:

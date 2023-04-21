@@ -23,15 +23,15 @@ pair<double, double> Creature::getCoordinates() {
     return this->coordinates;
 }
 
-int Creature::getID() {
+int Creature::getID() const {
     return this->ID;
 }
 
-int Creature::getHealth() {
+int Creature::getHealth() const {
     return this->health;
 }
 
-bool Creature::isAlive() {
+bool Creature::isAlive() const {
     return this->alive;
 }
 

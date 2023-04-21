@@ -6,13 +6,13 @@
  * Heap class for Food in Wildlife Simulation
  * */
 
-
-
-#ifndef INC_2023_HEAP_H
-#define INC_2023_HEAP_H
 #include "Food.h"
 #include <bits/stdc++.h>
 using namespace std;
+
+#ifndef INC_2023_HEAP_H
+#define INC_2023_HEAP_H
+
 const int MAX_HEAP = 31;
 
 class Heap {

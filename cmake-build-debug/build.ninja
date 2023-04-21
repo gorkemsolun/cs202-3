@@ -49,6 +49,12 @@ cmake_ninja_workdir = C$:/Users/pc/Desktop/2023/cmake-build-debug/
 
 build cmake_object_order_depends_target_2023: phony || CMakeFiles/2023.dir
 
+build CMakeFiles/2023.dir/main.cpp.obj: CXX_COMPILER__2023_Debug C$:/Users/pc/Desktop/2023/main.cpp || cmake_object_order_depends_target_2023
+  DEP_FILE = CMakeFiles\2023.dir\main.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\2023.dir
+  OBJECT_FILE_DIR = CMakeFiles\2023.dir
+
 build CMakeFiles/2023.dir/SimulationMgr.cpp.obj: CXX_COMPILER__2023_Debug C$:/Users/pc/Desktop/2023/SimulationMgr.cpp || cmake_object_order_depends_target_2023
   DEP_FILE = CMakeFiles\2023.dir\SimulationMgr.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always
@@ -81,7 +87,7 @@ build CMakeFiles/2023.dir/Heap.cpp.obj: CXX_COMPILER__2023_Debug C$:/Users/pc/De
 #############################################
 # Link the executable 2023.exe
 
-build 2023.exe: CXX_EXECUTABLE_LINKER__2023_Debug CMakeFiles/2023.dir/SimulationMgr.cpp.obj CMakeFiles/2023.dir/Food.cpp.obj CMakeFiles/2023.dir/Creature.cpp.obj CMakeFiles/2023.dir/Heap.cpp.obj
+build 2023.exe: CXX_EXECUTABLE_LINKER__2023_Debug CMakeFiles/2023.dir/main.cpp.obj CMakeFiles/2023.dir/SimulationMgr.cpp.obj CMakeFiles/2023.dir/Food.cpp.obj CMakeFiles/2023.dir/Creature.cpp.obj CMakeFiles/2023.dir/Heap.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\2023.dir
