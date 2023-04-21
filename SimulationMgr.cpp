@@ -3,13 +3,29 @@
  * 22003214
  * 202-1
  * HW3
- * Manager class for Wildlife Simulation
+ * Simulation Manager for Wildlife Simulation with main
  * */
 
-#include "SimulationMgr.h"
+#include "Heap.h"
+#include "Food.h"
+#include "Creature.h"
+using namespace std;
 
-void SimulationMgr::run(string fileName) {
-    //string fileName = "C:\\Users\\pc\\Desktop\\2023\\data.txt";
+double calculateEuclideanDistance(pair<double, double> f, pair<double, double> s) {
+    return sqrt(pow(f.first - s.first, 2) + pow(f.second - s.second, 2));
+}
+
+void printCreatures(vector<Creature> &creatures) {
+    for (Creature creature : creatures) {
+        cout << "Creature " << creature.getID() << ": ";
+        cout << creature.getCoordinates().first << ", ";
+        cout << creature.getCoordinates().second << endl;
+    }
+}
+
+int main(int argc, char** argv) {
+    //string fileName = argv[1];
+    string fileName = "C:\\Users\\pc\\Desktop\\2023\\data.txt";
 
     // Creating simulation space
 
@@ -149,16 +165,6 @@ void SimulationMgr::run(string fileName) {
 
         ++time;
     }
-}
 
-double SimulationMgr::calculateEuclideanDistance(pair<double, double> f, pair<double, double> s) {
-    return sqrt(pow(f.first - s.first, 2) + pow(f.second - s.second, 2));
-}
-
-void SimulationMgr::printCreatures(vector<Creature> &creatures) {
-    for (Creature creature : creatures) {
-        cout << "Creature " << creature.getID() << ": ";
-        cout << creature.getCoordinates().first << ", ";
-        cout << creature.getCoordinates().second << endl;
-    }
+    return 0;
 }
