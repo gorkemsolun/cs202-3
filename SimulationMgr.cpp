@@ -29,39 +29,37 @@ int main(int argc, char** argv) {
 
     // Creating simulation space
 
-    int livingCreatureCount = 0;
+    int livingCreatureCount = 0, time = 0;
     vector<Creature> creatures;
     Heap foodQualityHeap = Heap("QUALITY");
     Heap foodTimeHeap = Heap("TIME");
-    int time = 0;
     ifstream data(fileName);
-    vector<string> foodInput;
 
     // Simulation start
 
     // Getting inputs
 
-    string s;
-    int n; getline(data, s); n = stoi(s);
+    string input;
+    int n; getline(data, input); n = stoi(input);
     for (int i = 0; i < n; ++i) {
-        getline(data, s);
-        int k = 0, before = 0;
+        getline(data, input);
+        int k = 0, b = 0;
         int ID, health;
         pair<double, double> coordinates;
-        for (int j = 0; j < s.size(); ++j) {
-            if (s[j] == ',') {
+        for (int j = 0; j < input.size(); ++j) {
+            if (input[j] == ',') {
                 k++;
                 if (k == 1) {
-                    ID = stoi(s.substr(before, j - before));
+                    ID = stoi(input.substr(b, j - b));
                 } else if (k == 2) {
-                    coordinates.first = stod(s.substr(before, j - before));
+                    coordinates.first = stod(input.substr(b, j - b));
                 } else if (k == 3) {
-                    coordinates.second = stod(s.substr(before, j - before));
+                    coordinates.second = stod(input.substr(b, j - b));
                 }
-                before = j + 1;
+                b = j + 1;
             }
         }
-        health = stoi(s.substr(before));
+        health = stoi(input.substr(b));
         creatures.emplace_back(coordinates, ID, health);
         livingCreatureCount++;
     }
@@ -71,26 +69,26 @@ int main(int argc, char** argv) {
     sort(creatures.begin(), creatures.end(), [](Creature first, Creature second)
                                                                 {return first.getID() < second.getID();});
 
-    while (getline(data, s)) {
-        int k = 0, before = 0;
+    while (getline(data, input)) {
+        int k = 0, b = 0; // k is counter for ',' and before is index
         int ID, quality, spawnTime;
         pair<double, double> coordinates;
-        for (int j = 0; j < s.size(); ++j) {
-            if (s[j] == ',') {
+        for (int j = 0; j < input.size(); ++j) {
+            if (input[j] == ',') {
                 k++;
                 if (k == 1) {
-                    ID = stoi(s.substr(before, j - before));
+                    ID = stoi(input.substr(b, j - b));
                 } else if (k == 2) {
-                    coordinates.first = stod(s.substr(before, j - before));
+                    coordinates.first = stod(input.substr(b, j - b));
                 } else if (k == 3) {
-                    coordinates.second = stod(s.substr(before, j - before));
+                    coordinates.second = stod(input.substr(b, j - b));
                 } else if (k == 4) {
-                    quality = stoi(s.substr(before, j - before));
+                    quality = stoi(input.substr(b, j - b));
                 }
-                before = j + 1;
+                b = j + 1;
             }
         }
-        spawnTime = stoi(s.substr(before));
+        spawnTime = stoi(input.substr(b));
         foodTimeHeap.heapInsert(Food(coordinates, ID, quality, spawnTime));
     }
 
