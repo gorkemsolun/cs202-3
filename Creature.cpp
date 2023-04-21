@@ -44,8 +44,6 @@ void Creature::setHealth(int newHealth) {
 }
 
 void Creature::move(pair<double, double> coordinates) {
-    //cout << this->coordinates.first << " " << this->coordinates.second << endl;
-    //cout << coordinates.first << " " << coordinates.second << endl;
     double h = this->health, ten = 10;
     double speed = (h <= ten) ? 1 : (double)(ten / h);
     double distance = sqrt(pow(this->coordinates.first - coordinates.first, 2)
@@ -62,6 +60,5 @@ void Creature::move(pair<double, double> coordinates) {
     }
     this->coordinates.first += dx;
     this->coordinates.second += dy;
-    //cout << this->coordinates.first << " " << this->coordinates.second << endl;
 }
 

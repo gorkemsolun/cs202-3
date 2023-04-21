@@ -6,16 +6,19 @@
  * Heap class for Food in Wildlife Simulation
  * */
 
-#include "Food.h"
+
 
 #ifndef INC_2023_HEAP_H
 #define INC_2023_HEAP_H
-
+#include "Food.h"
+#include <bits/stdc++.h>
+using namespace std;
 const int MAX_HEAP = 31;
 
 class Heap {
 public:
     Heap();
+    Heap(string type);
 
     Food getTop();
     bool heapIsEmpty() const;
@@ -28,8 +31,10 @@ protected:
 private:
     Food items[MAX_HEAP];
     int size;
+    string type; // "QUALITY", "TIME" default: "QUALITY"
 
-    // true if second > first, false if first > second
+    // For QUALITY: true if second > first, false if first > second
+    // For TIME:
     bool compare(int firstIndex, int secondIndex);
 
 };

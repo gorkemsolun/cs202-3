@@ -12,12 +12,14 @@ Food::Food() {
     this->coordinates = make_pair(0,0);
     this->ID = -1;
     this->quality = -1;
+    this->time = INT32_MAX;
 }
 
-Food::Food(pair<double, double> coordinates, int ID, int quality) {
+Food::Food(pair<double, double> coordinates, int ID, int quality, int time) {
     this->coordinates = coordinates;
     this->ID = ID;
     this->quality = quality;
+    this->time = time;
 }
 
 int Food::getQuality() {
@@ -37,6 +39,11 @@ Food &Food::operator=(const Food &right) {
         this->coordinates = right.coordinates;
         this->quality = right.quality;
         this->ID = right.ID;
+        this->time = right.time;
     }
     return *this;
+}
+
+int Food::getTime() {
+    return this->time;
 }

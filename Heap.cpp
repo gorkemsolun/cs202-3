@@ -10,6 +10,12 @@
 
 Heap::Heap() {
     this->size = 0;
+    this->type = "QUALITY"; // default QUALITY
+}
+
+Heap::Heap(string type) {
+    this->size = 0;
+    this->type = type;
 }
 
 bool Heap::heapIsEmpty() const {
@@ -36,7 +42,7 @@ void Heap::heapInsert(const Food &newItem) {
 
 void Heap::heapDelete() {
     if (heapIsEmpty()){
-        cout << "HeapException: Heap empty" << endl;
+        cout << "HeapException in Delete: Heap empty" << endl;
     }
     else {
         this->items[0] = this->items[--this->size];
@@ -70,19 +76,34 @@ void Heap::heapRebuild(int root) {
  * if seconds id is lower than firsts true, else false
  */
 bool Heap::compare(int firstIndex, int secondIndex) {
-    if (this->items[firstIndex].getQuality() > this->items[secondIndex].getQuality()) {
-        return false;
-    } else if (this->items[firstIndex].getQuality() < this->items[secondIndex].getQuality()) {
-        return true;
-    } else {
-        if (this->items[firstIndex].getID() > this->items[secondIndex].getID()) {
+    if (this->type == "QUALITY") {
+        if (this->items[firstIndex].getQuality() > this->items[secondIndex].getQuality()) {
+            return false;
+        } else if (this->items[firstIndex].getQuality() < this->items[secondIndex].getQuality()) {
             return true;
         } else {
-            return false;
+            if (this->items[firstIndex].getID() > this->items[secondIndex].getID()) {
+                return true;
+            } else {
+                return false;
+            }
         }
+    } else if (this->type == "TIME"){
+        if (this->items[firstIndex].getTime() <= this->items[secondIndex].getTime()) {
+            return false;
+        } else {
+            return true;
+        }
+    } else {
+        cout << "Heap type is not determined." << endl;
+        return false;
     }
 }
 
 Food Heap::getTop() {
+    if (heapIsEmpty()){
+        cout << "HeapException in getTop: Heap empty" << endl;
+    }
     return this->items[0];
 }
+

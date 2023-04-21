@@ -6,26 +6,28 @@
  * Food class for Wildlife Simulation
  * */
 
-#include <bits/stdc++.h>
-using namespace std;
+
 
 #ifndef INC_2023_FOOD_H
 #define INC_2023_FOOD_H
+#include <bits/stdc++.h>
+using namespace std;
 
 class Food {
 public:
     Food();
-    Food(pair<double, double> coordinates, int ID, int quality);
+    Food(pair<double, double> coordinates, int ID, int quality, int time);
 
     Food &operator=(const Food &right);
 
     pair<double, double> getCoordinates();
     int getID();
     int getQuality();
+    int getTime();
 
 private:
     pair<double, double> coordinates;
-    int ID, quality;
+    int ID, quality, time;
 
 };
 

@@ -6,11 +6,10 @@
  * Creature class for Wildlife Simulation
  * */
 
-#include <bits/stdc++.h>
-using namespace std;
-
 #ifndef INC_2023_CREATURE_H
 #define INC_2023_CREATURE_H
+#include <bits/stdc++.h>
+using namespace std;
 
 class Creature {
 public:
