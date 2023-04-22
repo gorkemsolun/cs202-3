@@ -24,8 +24,8 @@ void printCreatures(vector<Creature> &creatures) {
 }
 
 int main(int argc, char** argv) {
-    //string fileName = argv[1];
-    string fileName = "C:\\Users\\pc\\Desktop\\2023\\data.txt";
+    string fileName = argv[1];
+    //string fileName = "C:\\Users\\pc\\Desktop\\2023\\data.txt";
 
     // Creating simulation space
 
